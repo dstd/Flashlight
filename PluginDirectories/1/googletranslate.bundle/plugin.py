@@ -2,6 +2,7 @@
 import urllib
 import json
 import os
+import re
 
 langs = {
     'auto': 'Any',
@@ -125,12 +126,22 @@ def fix_lang_shortcut(lang):
             
     return lang
     
-def results(parsed, original_query):
+def results(args, original_query):
     url = 'https://translate.google.com/m/translate#<LANG_FROM>/<LANG_TO>/<TEXT>'
 
-    text = parsed.get('~text', '').encode('UTF-8')
-    lang = parsed.get('~lang', '').encode('UTF-8').split('-')
-    
+    if args.get('~lang') == None:
+        lang_from = original_query[4:6]
+        lang_to = original_query[6:8]
+        if original_query[8:9] != ' ':
+            return
+        args['~lang'] = "%s-%s" % (lang_from, lang_to)
+    else:
+        match = re.search('gtr (.+) to (.+)', original_query) # workaround to match greedy
+        args = { '~text': match.group(1), '~lang': match.group(2) }
+        
+    text = args.get('~text', '').encode('UTF-8')
+    lang = args.get('~lang', '').encode('UTF-8').split('-')
+
     if len(lang) == 2:
         from_lang = fix_lang_shortcut(lang[0])
         from_lang_name = langs.get(from_lang)
