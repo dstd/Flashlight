@@ -170,13 +170,13 @@ def results(args, original_query):
     if from_lang_name == None:
         return {
             "title": "Google Translate",
-            "html": "%s: <b>%s</b>" % ("Invalid source language specified", from_lang)
+            "html": "<b>%s</b> is not valid language code or name" % (from_lang)
         }
 
     if to_lang_name == None:
         return {
             "title": "Google Translate",
-            "html": "%s: <b>%s</b>" % ("Invalid target language specified", to_lang)
+            "html": "<b>%s</b> is not valid language code or name" % (to_lang)
         }
 
     url = url.replace('<LANG_FROM>', from_lang)
