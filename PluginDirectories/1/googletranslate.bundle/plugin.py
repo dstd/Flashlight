@@ -111,8 +111,20 @@ langs = {
     'zu': 'Zulu' }
 
 def fix_lang_shortcut(lang):
-    return {'cn':'zh-CN', 'tw':'zh-TW'}.get(lang, lang)
+    if len(lang) < 2:
+        return lang
+    lang = lang.lower()
 
+    fixups = {'cn':'zh-CN', 'tw':'zh-TW'}
+    if lang in fixups:
+        return fixups[lang]
+    
+    for code, name in langs.items():
+        if name.lower().startswith(lang):
+            return code
+            
+    return lang
+    
 def results(parsed, original_query):
     url = 'https://translate.google.com/m/translate#<LANG_FROM>/<LANG_TO>/<TEXT>'
 
