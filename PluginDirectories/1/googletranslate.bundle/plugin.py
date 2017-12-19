@@ -140,8 +140,15 @@ def results(args, original_query):
         args = { '~text': match.group(1), '~lang': match.group(2) }
         
     text = args.get('~text', '').encode('UTF-8')
-    lang = args.get('~lang', '').encode('UTF-8').split('-')
+    lang = args.get('~lang', '').encode('UTF-8')
 
+    if ' ' in lang:
+        return {
+            "title": "Google Translate",
+            "html": ""
+        }
+
+    lang = lang.split('-')
     if len(lang) == 2:
         from_lang = fix_lang_shortcut(lang[0])
         from_lang_name = langs.get(from_lang)
