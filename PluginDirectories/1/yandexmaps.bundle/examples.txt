@@ -1,0 +1,9 @@
+yandex maps ~query(query here)
+maps ~query(query here)
+map of ~query(san francisco)
+ym ~query(query here)
+карты ~query(что ищем)
+карта ~query(что ищем)
+показать на карте ~query(что ищем)
+~query(что ищем) показать на карте
+~query(что ищем) на карте

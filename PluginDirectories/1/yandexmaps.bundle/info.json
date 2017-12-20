@@ -1,0 +1,6 @@
+{
+	"name": "yandexmaps",
+	"displayName": "Yandex Maps",
+	"examples": ["yandex maps New York", "show on maps new york", "maps new york", "map of new york", "ym new york", "карта москвы", "показать на карте москву"],
+	"categories": ["Search"]
+}
